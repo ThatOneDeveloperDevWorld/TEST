@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Julian's Editor - Unified Graphic</title>
+    <title>Julian's Editor</title>
     <style>
         * {
             box-sizing: border-box;
@@ -16,113 +16,114 @@
             height: 100%;
             overflow: hidden;
             font-family: 'Comic Sans MS', 'Bubblegum Sans', 'Chalkboard SE', sans-serif;
-            background-color: #5bc5f2; /* Sky blue background */
+            background-color: #5bc5f2;
         }
 
-        .main-container {
+        .container {
             position: relative;
             width: 100%;
             height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding-top: 100px; /* Offset for unified graphic position */
+            max-width: 450px;
+            margin: 0 auto;
+            background-color: #5bc5f2;
+            overflow: hidden;
         }
 
-        /* This is the unified graphic asset (jelogo.png) which composites the Earth, 
-           the main title text, the version, AND all the scattered clouds into one element.
-           It is scaled up as requested.
-        */
-        .unified-graphic-container {
-            position: relative;
-            width: 350px; /* Increased size to match visual scale in original */
-            height: 480px; /* Adjusted aspect ratio to fit all composited elements */
-            background-image: url('jelogo.png'); /* Composited image of earth, clouds, text */
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-            z-index: 5; /* Ensures clouds are visible and everything is layered above land/under UI */
-        }
-
-        /* Countdown number placement, relative to the main graphic to match positioning
-        */
-        .countdown-display {
+        /* Unified Graphic Container with v0.8.0 included */
+        .logo-container {
             position: absolute;
-            bottom: -30px; /* Centered just below the earth graphic */
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 410px;
+            height: 540px;
+            z-index: 5;
+        }
+
+        .logo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        /* Countdown Number - WHITE text */
+        .countdown {
+            position: absolute;
+            top: 590px;
             left: 50%;
             transform: translateX(-50%);
             font-size: 24px;
-            color: #6c757d; /* Gray text color */
+            color: #FFFFFF;
             font-weight: bold;
+            z-index: 6;
         }
 
-        /* UI element section (Start button, account link)
-        */
-        .ui-section {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 50px;
-            z-index: 10; /* Ensures UI is interactive and above any land overlay */
-        }
-
-        .action-button {
-            margin-bottom: 25px;
-            background-color: #4cd137; /* Bright green */
+        /* Start Button - Exact right color, no bottom blue shadow/part */
+        .start-btn {
+            position: absolute;
+            top: 630px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #72E683;
             color: #000;
             font-size: 26px;
             font-weight: bold;
             font-family: inherit;
             padding: 12px 45px;
-            border: 3px solid #000; /* Black outline */
+            border: 3px solid #000;
             border-radius: 10px;
             cursor: pointer;
-            box-shadow: 0 4px 0 #2e86de; /* Blue shadow */
+            box-shadow: none;
             transition: transform 0.1s ease;
+            z-index: 10;
         }
 
-        .action-button:active {
-            transform: translateY(4px);
-            box-shadow: 0 0 0 #2e86de;
+        .start-btn:active {
+            transform: translateX(-50%) translateY(2px);
         }
 
-        .login-link {
+        /* Account Link */
+        .account-link {
+            position: absolute;
+            top: 715px;
+            left: 50%;
+            transform: translateX(-50%);
             color: #fff;
             font-size: 16px;
             text-decoration: underline;
+            white-space: nowrap;
             cursor: pointer;
+            z-index: 10;
         }
 
-        /* Bottom Land Section (jeland.png) remains separate, covering the bottom edge
-        */
-        .land-foreground {
+        /* Bottom Land Section */
+        .land {
             position: absolute;
             bottom: 0;
             left: 0;
             width: 100%;
-            height: 140px; /* Matches the land height in the image */
-            background-image: url('jeland.png'); /* Wooden fence, characters, and junk */
+            height: 140px;
+            background-image: url('jeland.png');
             background-size: cover;
             background-repeat: no-repeat;
             background-position: bottom center;
-            z-index: 4; /* Layers below the UI but potentially above background elements */
+            z-index: 4;
         }
     </style>
 </head>
 <body>
 
-    <div class="main-container">
-        
-        <div class="unified-graphic-container">
-            <div class="countdown-display">3</div>
-        </div>
-        
-        <div class="ui-section">
-            <button class="action-button">Start!</button>
-            <div class="login-link">I already have an account</div>
+    <div class="container">
+        <div class="logo-container">
+            <img src="jelogo.png" alt="Julian's Editor Logo and Graphic">
         </div>
 
-        <div class="land-foreground"></div>
+        <div class="countdown">3</div>
+        <button class="start-btn">Start!</button>
+        <div class="account-link">I already have an account</div>
+
+        <div class="land"></div>
     </div>
 
 </body>
